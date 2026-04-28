@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Portal - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        .login-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .login-header i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .login-header h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+        .login-header p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        .role-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .role-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .role-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(79, 70, 229, 0.1);
+        }
+        .theme-toggle-fixed {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            z-index: 100;
+        }
+        .demo-credentials {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--bg-main);
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .demo-credentials p { margin-bottom: 0.25rem; }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle-fixed" id="themeToggleBtn" aria-label="Toggle Theme">
+        <i class="ri-moon-line"></i>
+    </button>
+
+    <div class="login-wrapper">
+        <div class="card login-card fade-in">
+            <div class="login-header">
+                <i class="ri-building-4-line"></i>
+                <h1>Hostel Portal</h1>
+                <p>Welcome back! Please login to your account.</p>
+            </div>
+
+            <div class="role-selector" id="roleSelector">
+                <button class="role-btn active" data-role="student">Student</button>
+                <button class="role-btn" data-role="warden">Warden</button>
+                <button class="role-btn" data-role="guard">Guard</button>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="userId">User ID</label>
+                    <input type="text" id="userId" class="form-control" placeholder="e.g. S001" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+
+            <div class="demo-credentials">
+                <strong>Demo Credentials (pwd: password)</strong>
+                <p>Student: S001 or S002</p>
+                <p>Warden: W001</p>
+                <p>Guard: G001</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/db.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

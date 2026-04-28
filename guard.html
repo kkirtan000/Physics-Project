@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Guard Dashboard - Hostel Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="ri-building-4-line"></i>
+                <h2>Hostel Portal</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-tab="verify">
+                    <i class="ri-qr-scan-2-line"></i>
+                    Verify Pass
+                </a>
+                <a href="#" class="nav-item" data-tab="logs">
+                    <i class="ri-history-line"></i>
+                    Entry Logs
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="nav-item btn-block" style="background:none;border:none;text-align:left;width:100%" id="logoutBtn">
+                    <i class="ri-logout-box-line"></i>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div style="display:flex; align-items:center; gap: 1rem;">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="ri-menu-line"></i>
+                    </button>
+                    <h3 class="hidden" id="mobileTitle">Guard Portal</h3>
+                </div>
+                <div class="header-user">
+                    <button class="btn btn-outline" id="themeToggleBtn" style="padding: 0.5rem; border-radius: 50%;">
+                        <i class="ri-moon-line"></i>
+                    </button>
+                    <div style="text-align: right; line-height: 1.2;">
+                        <span id="userNameDisplay">Guard Name</span>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary);">Security</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area">
+                
+                <!-- Verify Tab -->
+                <div id="verifyTab" class="tab-content fade-in">
+                    <h1 class="page-title">Verify Gatepass</h1>
+                    
+                    <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+                        <i class="ri-qr-scan-line" style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem; display: block;"></i>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Scan QR code or enter the Pass ID manually to verify and log entry.</p>
+                        
+                        <form id="verifyForm" style="display: flex; gap: 1rem; max-width: 400px; margin: 0 auto;">
+                            <input type="text" id="passIdInput" class="form-control" placeholder="Enter Pass ID (e.g., PASS-XYZ123)" required>
+                            <button type="submit" class="btn btn-primary">Verify</button>
+                        </form>
+                    </div>
+
+                    <!-- Verification Result Area -->
+                    <div id="verifyResult" class="card hidden fade-in" style="max-width: 600px; margin: 2rem auto;">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Logs Tab -->
+                <div id="logsTab" class="tab-content hidden fade-in">
+                    <h1 class="page-title">Today's Logs</h1>
+                    <div class="card">
+                        <div class="table-container">
+                            <table id="logsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Pass ID</th>
+                                        <th>Student</th>
+                                        <th>Out Time</th>
+                                        <th>In Time</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                            <div id="noLogsMsg" style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
+                                No logs recorded today.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/db.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/guard.js"></script>
+</body>
+</html>

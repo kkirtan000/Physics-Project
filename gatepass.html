@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Gatepass</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- HTML to PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            background-color: var(--bg-main);
+        }
+        
+        .pass-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .pass-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            color: #1f2937; /* Force dark text for print/pdf */
+            position: relative;
+        }
+
+        .pass-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .pass-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pass-body {
+            padding: 2rem;
+        }
+
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        #qrcode {
+            padding: 1rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .info-value {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 6rem;
+            color: rgba(16, 185, 129, 0.05);
+            pointer-events: none;
+            white-space: nowrap;
+            font-weight: 800;
+            z-index: 0;
+        }
+
+        .pass-footer {
+            background: #f9fafb;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #6b7280;
+            border-top: 1px dashed #e5e7eb;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .action-buttons {
+                display: none;
+            }
+            .pass-card {
+                box-shadow: none;
+                border: 1px solid #e5e7eb;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pass-container fade-in">
+        <div id="passToExport" class="pass-card">
+            <div class="watermark">APPROVED</div>
+            
+            <div class="pass-header">
+                <i class="ri-shield-check-fill" style="font-size: 3rem;"></i>
+                <h1>Digital Gatepass</h1>
+                <div style="opacity: 0.9; font-size: 0.875rem;">Hostel Management System</div>
+            </div>
+
+            <div class="pass-body" style="position: relative; z-index: 1;">
+                <div class="qr-section">
+                    <div id="qrcode"></div>
+                    <div style="font-family: monospace; font-size: 1.25rem; font-weight: bold; letter-spacing: 2px;" id="passIdDisplay">PASS-123456</div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Student Name</span>
+                        <span class="info-value" id="studentName">John Doe</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Room No.</span>
+                        <span class="info-value" id="roomNo">A-101</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Valid From</span>
+                        <span class="info-value" id="outDate">Oct 24, 2023, 10:00 AM</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Valid Until</span>
+                        <span class="info-value" id="inDate">Oct 26, 2023, 05:00 PM</span>
+                    </div>
+                </div>
+
+                <div class="info-item" style="margin-bottom: 1.5rem;">
+                    <span class="info-label">Destination</span>
+                    <span class="info-value" id="destination">City Center</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Approved By</span>
+                    <span class="info-value">Hostel Warden</span>
+                </div>
+            </div>
+
+            <div class="pass-footer">
+                This gatepass is valid only for the specified dates. Present this QR code at the security gate for verification.
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-outline" onclick="window.close()" id="closeBtn">
+                <i class="ri-close-line"></i> Close
+            </button>
+            <button class="btn btn-primary" id="downloadBtn">
+                <i class="ri-download-line"></i> Download PDF
+            </button>
+        </div>
+    </div>
+
+    <script src="js/db.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/gatepass.js"></script>
+</body>
+</html>
