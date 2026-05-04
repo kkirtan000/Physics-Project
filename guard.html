@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
+
 <body>
     <div class="dashboard-layout">
         <!-- Sidebar -->
@@ -29,7 +31,8 @@
                 </a>
             </nav>
             <div class="sidebar-footer">
-                <button class="nav-item btn-block" style="background:none;border:none;text-align:left;width:100%" id="logoutBtn">
+                <button class="nav-item btn-block" style="background:none;border:none;text-align:left;width:100%"
+                    id="logoutBtn">
                     <i class="ri-logout-box-line"></i>
                     Logout
                 </button>
@@ -57,17 +60,20 @@
             </header>
 
             <div class="content-area">
-                
+
                 <!-- Verify Tab -->
                 <div id="verifyTab" class="tab-content fade-in">
                     <h1 class="page-title">Verify Gatepass</h1>
-                    
+
                     <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
-                        <i class="ri-qr-scan-line" style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem; display: block;"></i>
-                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Scan QR code or enter the Pass ID manually to verify and log entry.</p>
-                        
+                        <i class="ri-qr-scan-line"
+                            style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem; display: block;"></i>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">enter the Pass ID manually to
+                            verify and log entry.</p>
+
                         <form id="verifyForm" style="display: flex; gap: 1rem; max-width: 400px; margin: 0 auto;">
-                            <input type="text" id="passIdInput" class="form-control" placeholder="Enter Pass ID (e.g., PASS-XYZ123)" required>
+                            <input type="text" id="passIdInput" class="form-control"
+                                placeholder="Enter Pass ID (e.g., PASS-XYZ123)" required>
                             <button type="submit" class="btn btn-primary">Verify</button>
                         </form>
                     </div>
@@ -97,7 +103,8 @@
                                     <!-- Populated via JS -->
                                 </tbody>
                             </table>
-                            <div id="noLogsMsg" style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
+                            <div id="noLogsMsg"
+                                style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
                                 No logs recorded today.
                             </div>
                         </div>
@@ -116,4 +123,5 @@
     <script src="js/auth.js"></script>
     <script src="js/guard.js"></script>
 </body>
+
 </html>
