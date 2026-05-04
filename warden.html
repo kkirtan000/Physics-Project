@@ -25,6 +25,9 @@
                 <a href="#" class="nav-item" data-tab="complaints">
                     <i class="ri-feedback-line"></i> Complaints
                 </a>
+                <a href="#" class="nav-item" data-tab="food">
+                    <i class="ri-restaurant-line"></i> Manage Food Menu
+                </a>
             </nav>
             <div class="sidebar-footer">
                 <button class="nav-item btn-block" style="background:none;border:none;text-align:left;width:100%" id="logoutBtn">
@@ -119,6 +122,34 @@
                             <div id="noWardenComplaintsMsg" style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
                                 No complaints found.
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Food Menu Tab -->
+                <div id="foodTab" class="tab-content hidden fade-in">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h1 class="page-title" style="margin: 0;">Manage Weekly Food Menu</h1>
+                        <button class="btn btn-primary" onclick="saveWardenFoodMenu()">
+                            <i class="ri-save-line"></i> Save Changes
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="table-container">
+                            <table style="min-width: 600px;">
+                                <thead>
+                                    <tr>
+                                        <th>Day</th>
+                                        <th>Breakfast</th>
+                                        <th>Lunch</th>
+                                        <th>Dinner</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="wardenFoodTableBody">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

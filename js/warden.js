@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
     const tabs = {
         'dashboard': document.getElementById('dashboardTab'),
-        'complaints': document.getElementById('complaintsTab')
+        'complaints': document.getElementById('complaintsTab'),
+        'food': document.getElementById('foodTab')
     };
 
     navItems.forEach(item => {
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (tabId === 'dashboard') renderRequests();
             if (tabId === 'complaints') renderComplaints();
+            if (tabId === 'food') loadWardenFoodMenu();
         });
     });
 
@@ -285,6 +287,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // --- Food Menu Logic ---
+    function loadWardenFoodMenu() {
+        const tbody = document.getElementById('wardenFoodTableBody');
+        if (!tbody) return;
+
+        const menu = DB.getFoodMenu();
+        const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        
+        tbody.innerHTML = '';
+        days.forEach(day => {
+            const data = menu[day] || { breakfast: '', lunch: '', dinner: '' };
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="text-transform: capitalize; vertical-align: middle;"><strong>${day}</strong></td>
+                <td><input type="text" class="form-control" id="food_${day}_breakfast" value="${data.breakfast}"></td>
+                <td><input type="text" class="form-control" id="food_${day}_lunch" value="${data.lunch}"></td>
+                <td><input type="text" class="form-control" id="food_${day}_dinner" value="${data.dinner}"></td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    window.saveWardenFoodMenu = () => {
+        const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        const newMenu = {};
+        
+        days.forEach(day => {
+            const breakfast = document.getElementById(`food_${day}_breakfast`)?.value.trim() || '';
+            const lunch = document.getElementById(`food_${day}_lunch`)?.value.trim() || '';
+            const dinner = document.getElementById(`food_${day}_dinner`)?.value.trim() || '';
+            newMenu[day] = { breakfast, lunch, dinner };
+        });
+
+        DB.saveFoodMenu(newMenu);
+        Utils.showToast('Food Menu updated successfully!', 'success');
+    };
 
     // Initial render
     renderRequests();

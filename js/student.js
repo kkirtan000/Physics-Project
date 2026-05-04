@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Load data for specific tabs
             if (tabId === 'dashboard') loadRequests();
+            if (tabId === 'food') loadFoodMenu();
             if (tabId === 'laundry') loadLaundry();
             if (tabId === 'fees') loadFees();
             if (tabId === 'complaints') loadComplaints();
@@ -262,6 +263,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Food Menu Logic ---
+    function loadFoodMenu() {
+        const tbody = document.getElementById('foodMenuTableBody');
+        if (!tbody) return;
+
+        const menu = DB.getFoodMenu();
+        const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        
+        tbody.innerHTML = '';
+        days.forEach(day => {
+            if (menu[day]) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="text-transform: capitalize;"><strong>${day}</strong></td>
+                    <td>${menu[day].breakfast || '-'}</td>
+                    <td>${menu[day].lunch || '-'}</td>
+                    <td>${menu[day].dinner || '-'}</td>
+                `;
+                tbody.appendChild(tr);
+            }
+        });
+    }
+
     // Initial load
     loadRequests();
+    loadFoodMenu();
 });

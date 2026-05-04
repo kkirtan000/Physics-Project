@@ -5,7 +5,8 @@ const DB_KEYS = {
     THEME: 'gatepass_theme',
     COMPLAINTS: 'hostel_complaints',
     FEES: 'hostel_fees',
-    LAUNDRY: 'hostel_laundry'
+    LAUNDRY: 'hostel_laundry',
+    FOOD_MENU: 'hostel_food_menu'
 };
 
 // Initial Dummy Data
@@ -44,6 +45,18 @@ const DB = {
                 { id: 'L-124', studentId: 'S001', date: new Date(Date.now() - 86400000).toISOString(), items: 3, weight: '1kg', status: 'Delivered' }
             ];
             localStorage.setItem(DB_KEYS.LAUNDRY, JSON.stringify(dummyLaundry));
+        }
+        if (!localStorage.getItem(DB_KEYS.FOOD_MENU)) {
+            const dummyFoodMenu = {
+                monday: { breakfast: 'Poha & Tea', lunch: 'Dal, Rice, Roti, Sabzi', dinner: 'Paneer Masala, Rice' },
+                tuesday: { breakfast: 'Idli Sambar', lunch: 'Rajma, Rice, Roti', dinner: 'Veg Biryani' },
+                wednesday: { breakfast: 'Aloo Paratha', lunch: 'Dal Tadka, Rice, Mix Veg', dinner: 'Chole Bhature' },
+                thursday: { breakfast: 'Upma & Coffee', lunch: 'Kadhi Pakora, Rice, Roti', dinner: 'Egg Curry/Veg Kurma' },
+                friday: { breakfast: 'Dosa & Chutney', lunch: 'Dal Makhani, Jeera Rice', dinner: 'Fried Rice & Manchurian' },
+                saturday: { breakfast: 'Puri Sabzi', lunch: 'Khichdi, Kadhi', dinner: 'Pulao & Raita' },
+                sunday: { breakfast: 'Bread Omelet/Jam', lunch: 'Special Thali', dinner: 'Noodles & Soup' }
+            };
+            localStorage.setItem(DB_KEYS.FOOD_MENU, JSON.stringify(dummyFoodMenu));
         }
     },
     
@@ -122,6 +135,10 @@ const DB = {
 
     // Laundry
     getLaundry: () => JSON.parse(localStorage.getItem(DB_KEYS.LAUNDRY) || '[]'),
+
+    // Food Menu
+    getFoodMenu: () => JSON.parse(localStorage.getItem(DB_KEYS.FOOD_MENU) || '{}'),
+    saveFoodMenu: (menu) => localStorage.setItem(DB_KEYS.FOOD_MENU, JSON.stringify(menu)),
 
     getCurrentUser: () => {
         const userStr = localStorage.getItem(DB_KEYS.SESSION);
