@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
+
 <body>
     <div class="dashboard-layout">
         <!-- Sidebar -->
@@ -36,7 +38,8 @@
                 </a>
             </nav>
             <div class="sidebar-footer">
-                <button class="nav-item btn-block" style="background:none;border:none;text-align:left;width:100%" id="logoutBtn">
+                <button class="nav-item btn-block" style="background:none;border:none;text-align:left;width:100%"
+                    id="logoutBtn">
                     <i class="ri-logout-box-line"></i> Logout
                 </button>
             </div>
@@ -63,12 +66,14 @@
             </header>
 
             <div class="content-area">
-                
+
                 <!-- Gatepass Dashboard Tab -->
                 <div id="dashboardTab" class="tab-content fade-in">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                         <h1 class="page-title" style="margin: 0;">Gatepass Requests</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('applyPassModal').classList.add('show')">
+                        <button class="btn btn-primary"
+                            onclick="document.getElementById('applyPassModal').classList.add('show')">
                             <i class="ri-add-line"></i> Apply Pass
                         </button>
                     </div>
@@ -89,7 +94,8 @@
                                     <!-- Populated via JS -->
                                 </tbody>
                             </table>
-                            <div id="noRequestsMsg" style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
+                            <div id="noRequestsMsg"
+                                style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
                                 No gatepass requests found.
                             </div>
                         </div>
@@ -111,13 +117,48 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td><strong>Monday</strong></td><td>Poha & Tea</td><td>Dal, Rice, Roti, Sabzi</td><td>Paneer Masala, Rice</td></tr>
-                                    <tr><td><strong>Tuesday</strong></td><td>Idli Sambar</td><td>Rajma, Rice, Roti</td><td>Veg Biryani</td></tr>
-                                    <tr><td><strong>Wednesday</strong></td><td>Aloo Paratha</td><td>Dal Tadka, Rice, Mix Veg</td><td>Chole Bhature</td></tr>
-                                    <tr><td><strong>Thursday</strong></td><td>Upma & Coffee</td><td>Kadhi Pakora, Rice, Roti</td><td>Egg Curry/Veg Kurma</td></tr>
-                                    <tr><td><strong>Friday</strong></td><td>Dosa & Chutney</td><td>Dal Makhani, Jeera Rice</td><td>Fried Rice & Manchurian</td></tr>
-                                    <tr><td><strong>Saturday</strong></td><td>Puri Sabzi</td><td>Khichdi, Kadhi</td><td>Pulao & Raita</td></tr>
-                                    <tr><td><strong>Sunday</strong></td><td>Bread Omelet/Jam</td><td>Special Thali</td><td>Noodles & Soup</td></tr>
+                                    <tr>
+                                        <td><strong>Monday</strong></td>
+                                        <td>Poha & Tea</td>
+                                        <td>Dal, Rice, Roti, Sabzi</td>
+                                        <td>Paneer Masala, Rice</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tuesday</strong></td>
+                                        <td>Idli Sambar</td>
+                                        <td>Rajma, Rice, Roti</td>
+                                        <td>Veg Biryani</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Wednesday</strong></td>
+                                        <td>Aloo Paratha</td>
+                                        <td>Dal Tadka, Rice, Mix Veg</td>
+                                        <td>Chole Bhature</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Thursday</strong></td>
+                                        <td>Upma & Coffee</td>
+                                        <td>Kadhi Pakora, Rice, Roti</td>
+                                        <td>Egg Curry/Veg Kurma</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Friday</strong></td>
+                                        <td>Dosa & Chutney</td>
+                                        <td>Dal Makhani, Jeera Rice</td>
+                                        <td>Fried Rice & Manchurian</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Saturday</strong></td>
+                                        <td>Puri Sabzi</td>
+                                        <td>Khichdi, Kadhi</td>
+                                        <td>Pulao & Raita</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sunday</strong></td>
+                                        <td>Bread Omelet/Jam</td>
+                                        <td>Special Thali</td>
+                                        <td>Noodles & Soup</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -150,19 +191,29 @@
                 <!-- Fees Tab -->
                 <div id="feesTab" class="tab-content hidden fade-in">
                     <h1 class="page-title">Fees & Payments</h1>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                        <div class="card" style="text-align: center; background: rgba(79, 70, 229, 0.05); border-color: var(--primary);">
-                            <h3 style="color: var(--text-secondary); font-size: 0.875rem; text-transform: uppercase;">Total Fee</h3>
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary);" id="totalFeeDisplay">₹0</div>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <div class="card"
+                            style="text-align: center; background: rgba(79, 70, 229, 0.05); border-color: var(--primary);">
+                            <h3 style="color: var(--text-secondary); font-size: 0.875rem; text-transform: uppercase;">
+                                Total Fee</h3>
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary);" id="totalFeeDisplay">
+                                ₹0</div>
                         </div>
-                        <div class="card" style="text-align: center; background: rgba(16, 185, 129, 0.05); border-color: var(--success);">
-                            <h3 style="color: var(--text-secondary); font-size: 0.875rem; text-transform: uppercase;">Total Paid</h3>
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--success);" id="paidFeeDisplay">₹0</div>
+                        <div class="card"
+                            style="text-align: center; background: rgba(16, 185, 129, 0.05); border-color: var(--success);">
+                            <h3 style="color: var(--text-secondary); font-size: 0.875rem; text-transform: uppercase;">
+                                Total Paid</h3>
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--success);" id="paidFeeDisplay">
+                                ₹0</div>
                         </div>
-                        <div class="card" style="text-align: center; background: rgba(239, 68, 68, 0.05); border-color: var(--danger);">
-                            <h3 style="color: var(--text-secondary); font-size: 0.875rem; text-transform: uppercase;">Balance Due</h3>
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--danger);" id="dueFeeDisplay">₹0</div>
+                        <div class="card"
+                            style="text-align: center; background: rgba(239, 68, 68, 0.05); border-color: var(--danger);">
+                            <h3 style="color: var(--text-secondary); font-size: 0.875rem; text-transform: uppercase;">
+                                Balance Due</h3>
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--danger);" id="dueFeeDisplay">₹0
+                            </div>
                         </div>
                     </div>
 
@@ -208,9 +259,11 @@
 
                 <!-- Complaints Tab -->
                 <div id="complaintsTab" class="tab-content hidden fade-in">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                         <h1 class="page-title" style="margin: 0;">My Complaints & Feedback</h1>
-                        <button class="btn btn-primary" onclick="document.getElementById('complaintModal').classList.add('show')">
+                        <button class="btn btn-primary"
+                            onclick="document.getElementById('complaintModal').classList.add('show')">
                             <i class="ri-add-line"></i> New Complaint
                         </button>
                     </div>
@@ -231,7 +284,8 @@
                                     <!-- Populated via JS -->
                                 </tbody>
                             </table>
-                            <div id="noComplaintsMsg" style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
+                            <div id="noComplaintsMsg"
+                                style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
                                 No complaints found.
                             </div>
                         </div>
@@ -247,7 +301,9 @@
         <div class="card modal-content">
             <div class="modal-header">
                 <h3>Apply for Gatepass</h3>
-                <button class="modal-close" onclick="document.getElementById('applyPassModal').classList.remove('show')"><i class="ri-close-line"></i></button>
+                <button class="modal-close"
+                    onclick="document.getElementById('applyPassModal').classList.remove('show')"><i
+                        class="ri-close-line"></i></button>
             </div>
             <form id="applyForm">
                 <div class="form-group">
@@ -264,7 +320,8 @@
                 </div>
                 <div class="form-group">
                     <label for="reason">Reason for Leave</label>
-                    <textarea id="reason" class="form-control" rows="3" placeholder="Please specify the reason in detail..." required></textarea>
+                    <textarea id="reason" class="form-control" rows="3"
+                        placeholder="Please specify the reason in detail..." required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
             </form>
@@ -276,7 +333,8 @@
         <div class="card modal-content">
             <div class="modal-header">
                 <h3>Pass Details</h3>
-                <button class="modal-close" onclick="document.getElementById('passModal').classList.remove('show')"><i class="ri-close-line"></i></button>
+                <button class="modal-close" onclick="document.getElementById('passModal').classList.remove('show')"><i
+                        class="ri-close-line"></i></button>
             </div>
             <div id="modalBody"></div>
         </div>
@@ -287,7 +345,9 @@
         <div class="card modal-content">
             <div class="modal-header">
                 <h3>Submit Complaint/Feedback</h3>
-                <button class="modal-close" onclick="document.getElementById('complaintModal').classList.remove('show')"><i class="ri-close-line"></i></button>
+                <button class="modal-close"
+                    onclick="document.getElementById('complaintModal').classList.remove('show')"><i
+                        class="ri-close-line"></i></button>
             </div>
             <form id="complaintForm">
                 <div class="form-group">
@@ -306,7 +366,8 @@
                 </div>
                 <div class="form-group">
                     <label for="compDesc">Description</label>
-                    <textarea id="compDesc" class="form-control" rows="4" placeholder="Detail your issue here..." required></textarea>
+                    <textarea id="compDesc" class="form-control" rows="4" placeholder="Detail your issue here..."
+                        required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
@@ -321,4 +382,5 @@
     <script src="js/auth.js"></script>
     <script src="js/student.js"></script>
 </body>
+
 </html>

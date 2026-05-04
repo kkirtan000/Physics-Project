@@ -54,6 +54,16 @@ const DB = {
         return users.find(u => u.id === id);
     },
     
+    addUser: (user) => {
+        const users = DB.getUsers();
+        if (users.find(u => u.id === user.id)) {
+            return false;
+        }
+        users.push(user);
+        localStorage.setItem(DB_KEYS.USERS, JSON.stringify(users));
+        return true;
+    },
+    
     getPasses: () => JSON.parse(localStorage.getItem(DB_KEYS.PASSES) || '[]'),
     
     savePasses: (passes) => {

@@ -61,6 +61,85 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = `${user.role}.html`;
             }, 1000);
         });
+
+        // Toggle Login / Signup
+        const showSignupBtn = document.getElementById('showSignup');
+        const showLoginBtn = document.getElementById('showLogin');
+        const signupForm = document.getElementById('signupForm');
+        const roleSelector = document.getElementById('roleSelector');
+        
+        if (showSignupBtn && showLoginBtn && signupForm) {
+            showSignupBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginForm.style.display = 'none';
+                roleSelector.style.display = 'none';
+                signupForm.style.display = 'block';
+            });
+            showLoginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                roleSelector.style.display = 'flex';
+            });
+        }
+
+        // Signup form logic
+        const signupRole = document.getElementById('signupRole');
+        const studentFields = document.getElementById('studentFields');
+        const staffFields = document.getElementById('staffFields');
+        
+        if (signupRole && studentFields) {
+            signupRole.addEventListener('change', (e) => {
+                if (e.target.value === 'student') {
+                    studentFields.style.display = 'block';
+                    if (staffFields) staffFields.style.display = 'none';
+                } else {
+                    studentFields.style.display = 'none';
+                    if (staffFields) staffFields.style.display = 'block';
+                }
+            });
+        }
+
+        if (signupForm) {
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('signupName').value.trim();
+                const id = document.getElementById('signupId').value.trim();
+                const password = document.getElementById('signupPassword').value;
+                const role = document.getElementById('signupRole').value;
+                const room = document.getElementById('signupRoom') ? document.getElementById('signupRoom').value.trim() : '';
+                const phone = document.getElementById('signupPhone') ? document.getElementById('signupPhone').value.trim() : '';
+
+                if (!name || !id || !password || !role) {
+                    Utils.showToast('Please fill all required fields', 'error');
+                    return;
+                }
+
+                // Security check for Warden and Guard
+                if (role !== 'student') {
+                    const secretCode = document.getElementById('signupSecretCode') ? document.getElementById('signupSecretCode').value.trim() : '';
+                    if (secretCode !== 'ADMIN123') {
+                        Utils.showToast('Invalid Admin Secret Code!', 'error');
+                        return;
+                    }
+                }
+
+                const newUser = { id, name, password, role };
+                if (role === 'student') {
+                    newUser.room = room;
+                    newUser.phone = phone;
+                }
+
+                const success = DB.addUser(newUser);
+                if (success) {
+                    Utils.showToast('Account created successfully! Please log in.', 'success');
+                    signupForm.reset();
+                    showLoginBtn.click(); // Back to login view
+                } else {
+                    Utils.showToast('User ID already exists!', 'error');
+                }
+            });
+        }
     }
 
     // Global Logout handler setup
