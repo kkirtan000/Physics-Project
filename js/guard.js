@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tab Navigation
     const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
     const tabs = {
-        'verify': document.getElementById('verifyTab'),
-        'logs': document.getElementById('logsTab')
+        'verify': document.getElementById('verifyTab')
     };
 
     navItems.forEach(item => {
@@ -34,10 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (window.innerWidth <= 768) {
                 sidebar.classList.remove('show');
-            }
-
-            if (tabId === 'logs') {
-                renderLogs();
             }
         });
     });
@@ -139,52 +134,4 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('passIdInput').value = '';
     };
 
-    function renderLogs() {
-        const tbody = document.querySelector('#logsTable tbody');
-        const noDataMsg = document.getElementById('noLogsMsg');
-        
-        let passes = DB.getPasses().filter(p => p.guardOutTime || p.guardInTime);
-        
-        // Sort by most recent log
-        passes.sort((a, b) => {
-            let timeA = new Date(a.guardInTime || a.guardOutTime);
-            let timeB = new Date(b.guardInTime || b.guardOutTime);
-            return timeB - timeA;
-        });
-
-        tbody.innerHTML = '';
-        
-        if (passes.length === 0) {
-            noDataMsg.style.display = 'block';
-            document.getElementById('logsTable').style.display = 'none';
-            return;
-        }
-
-        noDataMsg.style.display = 'none';
-        document.getElementById('logsTable').style.display = 'table';
-
-        passes.forEach(pass => {
-            const tr = document.createElement('tr');
-            
-            let status = 'OUT';
-            let badgeClass = 'badge-pending';
-            
-            if (pass.guardInTime) {
-                status = 'RETURNED';
-                badgeClass = 'badge-approved';
-            }
-
-            tr.innerHTML = `
-                <td><strong>${pass.id}</strong></td>
-                <td>
-                    <div style="font-weight: 500;">${pass.studentName}</div>
-                    <div style="font-size: 0.75rem; color: var(--text-secondary);">${pass.room}</div>
-                </td>
-                <td>${pass.guardOutTime ? Utils.formatDate(pass.guardOutTime) : '-'}</td>
-                <td>${pass.guardInTime ? Utils.formatDate(pass.guardInTime) : '-'}</td>
-                <td><span class="badge ${badgeClass}">${status}</span></td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
 });
